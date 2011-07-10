@@ -1,0 +1,95 @@
+README: Date Updater - Updates Modified date of files in target directory.
+
+Copyright (C) 2011 Andrew W. Cummings
+ 
+ This program is free software: You can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+Usage: dateupdate.sh [TARGET [DATE]]
+       TARGET - Directory script will operate on.
+       DATE - Date in YYYYMMDD, YYYY-MM-DD, or YYYY/MM/DD format.
+
+ Date Updater is used to update the last modified date of all files in the 
+ specified target directory.  If no date is provided, Date Updater will 
+ attempt to extract the date from the directory name.  
+
+ Date Updater will only update the Modified Date if the Date is not
+ specified on the command line and the current Modified Date of the target
+ file is in the future.
+
+ Date Updater is recursive by design.  All files under the TARGET directory, 
+ including other directories and their files, will have their Modified date 
+ altered.  Symbolic Links are ignored.
+
+
+Release Notes:
+
+Version 1.0 - 2011/07/10 - Andrew Cummings (cydonian.monk@gmail.com)
+
+  The idea behind Date Updater is simple: Update the last modified date of
+  every file under a directory to match either a Date String extracted from
+  the directory name or a Date provided by the user.  If the user does not
+  provide a date, then only files with Modified Dates in the future from
+  the target will be updated.
+ 
+
+  My Problem: I have 12 years of digital photos, captured with a multitude 
+  of equipment.  Most, if not all, of my early photos are lacking EXIF tags. 
+  The older Kodak and Olympus cameras I cut my teeth on simply didn't grok 
+  the EXIF thing.  Even my first Canon DSLR had issues with EXIF data and 
+  would commonly write garbage dates to EXIF.
+
+  From 2000 onward I saved my digital photos using a directory naming scheme 
+  with a date in the YYYYMMDD format.  This gave me automatic file sorting 
+  by date and allowed me to leave the originals with their camera-determined
+  filename for indexing purposes.
+  
+  In the many years since my collection of original image files has migrated
+  across numerous file and operating systems.  As a result the original 
+  Modified dates only date back to 2008, and in some cases 2009.  As these 
+  are the original unmodified files, the Modified date /should/ be when 
+  image was taken.  No longer the case.
+
+  I've lately adpoted an "OS-agnostic" approach to my computing life.  
+  While I have traditionally done everything on GNU/Linux, I recently moved 
+  my data to a proper fileserver.  Now I'm equally likely to process an image 
+  on the Mac using Pixelmator as I am in Gentoo using The Gimp. But single 
+  image editing isn't really my problem....
+
+  Life continues to move into the "Cloud."  I'd like to use or at least test
+  the many image management tools that are available.  This is where the date 
+  issue comes into play.  Many of these image suites use the Modified date or 
+  the EXIF date to determine when the image was taken.  Both date are suspect 
+  on more than 90% of my photos.
+
+
+  My Solution: This script.  Initially the script will only use touch to 
+  update the Modified date of files.  Eventually I'll add support for 
+  reading the date from EXIF data, and perhaps even support for updating 
+  the date in the EXIF data when corrupt.  EXIF changes will require a bit 
+  more than just this script, and will come later.
+
+  Until then, Enjoy this scimple script!
+
+
+  It's worth noting that I have only tested this script on Gentoo GNU/Linux,
+  on both an x86 box (3.0GHz Pentium D) and an amd64 box (3.0 GHz Ahtlon II 
+  X2 250).  I don't promise that it'll work on your chosen distro.  Test it 
+  on sample data before you run it on the important stuff!  I also tested 
+  it on a CIFS/SaMBa share, but both ends are Gentoo, so....
+
+  If it's not working, remember to check file permissions!
+
+  AWC
+
